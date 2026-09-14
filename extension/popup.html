@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOSS直聘岗位提取</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 290px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      padding: 16px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .header img { width: 28px; height: 28px; border-radius: 6px; }
+    .header h2 { font-size: 14px; font-weight: 700; color: #0f172a; }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .dot { width: 6px; height: 6px; background: #10b981; border-radius: 50%; }
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #475569;
+    }
+    .card strong { color: #0f172a; }
+    .card ul { margin-left: 16px; margin-top: 6px; }
+    .card li { margin-bottom: 4px; }
+    .badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: monospace;
+    }
+    .footer {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 11px;
+    }
+    .footer a {
+      color: #00bebd;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="icons/icon48.png" alt="icon">
+    <h2>岗位与公司说明提取器</h2>
+  </div>
+
+  <div class="status">
+    <span class="dot"></span>
+    <span>运行中 · 零干扰模式</span>
+  </div>
+
+  <div class="card">
+    <strong>✨ 核心功能：</strong>
+    <ul>
+      <li>🏢 <b>公司全景</b>：公司名称、规模、行业、融资</li>
+      <li>👤 <b>招聘负责人</b>：姓名身份与实时活跃度状态</li>
+      <li>📍 <b>工作地址</b>：准确提取详细地址并支持一键复制</li>
+      <li>💰 <b>薪资解密</b>：智能解密 BOSS 自定义字体乱码</li>
+      <li>📋 <b>一键复制</b>：复制全文 / 职责 / 要求 / 公司 / 地址</li>
+      <li>⌨️ <b>快捷键唤出</b>：<span class="badge">Alt + C</span></li>
+      <li><b>零手势冲突</b>：独立抽屉面板，绝不干扰鼠标手势</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <a href="https://github.com/binaryu/boss-copy" target="_blank">🔗 GitHub: binaryu/boss-copy</a>
+  </div>
+</body>
+</html>

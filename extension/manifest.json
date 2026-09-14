@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "BOSS直聘信息提取复制",
+  "version": "2.2.0",
+  "description": "自动提取BOSS直聘职位的公司名称、招聘活跃度、工作地址、岗位职责等信息。",
+  "homepage_url": "https://github.com/binaryu/boss-copy",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "BOSS直聘岗位说明提取器",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.zhipin.com/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}
