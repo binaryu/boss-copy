@@ -44,6 +44,7 @@
     let locationAddress = '';
     let tags = [];
     let welfareList = [];
+    let keywords = [];
     let descEl = null;
 
     if (isRightBox) {
@@ -181,6 +182,22 @@
       descEl = document.querySelector('.job-sec-text') || document.querySelector('.job-detail-section');
     }
 
+    // 提取岗位关键词/技能标签（清洗隐藏防爬水印）
+    const kwElements = (isRightBox ? rightBox : document).querySelectorAll('.job-keyword-list li');
+    if (kwElements.length > 0) {
+      keywords = Array.from(kwElements).map(li => {
+        const clone = li.cloneNode(true);
+        clone.querySelectorAll('style, script, [style*="visibility: hidden"], [style*="display: none"], [style*="font-size: 0"]').forEach(s => s.remove());
+        li.querySelectorAll('*').forEach(el => {
+          const s = window.getComputedStyle(el);
+          if (s.visibility === 'hidden' || s.display === 'none' || parseFloat(s.fontSize) === 0) {
+            el.classList.forEach(c => clone.querySelectorAll('.' + c).forEach(x => x.remove()));
+          }
+        });
+        return clone.innerText.trim();
+      }).filter(Boolean);
+    }
+
     // 清理混淆与不可见文本
     let cleanDesc = '';
     if (descEl) {
@@ -218,6 +235,7 @@
     locationAddress = decodeBossFontText(locationAddress);
     tags = tags.map(t => decodeBossFontText(t));
     welfareList = welfareList.map(w => decodeBossFontText(w));
+    keywords = keywords.map(k => decodeBossFontText(k));
 
     // 智能切分岗位职责与任职要求
     let duties = '';
@@ -255,6 +273,7 @@
       locationAddress,
       tags,
       welfareList,
+      keywords,
       fullDesc: cleanDesc || '暂未提取到职位详情，请先在页面点击一个具体职位。',
       duties,
       requirements
@@ -459,6 +478,12 @@
       // 职位要求标签与福利待遇
       const allTagsContainer = document.getElementById('bext-all-tags');
       allTagsContainer.innerHTML = '';
+      currentData.keywords.forEach(k => {
+        const sp = document.createElement('span');
+        sp.className = 'bext-meta-pill keyword';
+        sp.innerText = '🎯 ' + k;
+        allTagsContainer.appendChild(sp);
+      });
       currentData.tags.forEach(t => {
         const sp = document.createElement('span');
         sp.className = 'bext-meta-pill';
@@ -471,7 +496,7 @@
         sp.innerText = '🎁 ' + w;
         allTagsContainer.appendChild(sp);
       });
-      if (currentData.tags.length === 0 && currentData.welfareList.length === 0) {
+      if (currentData.keywords.length === 0 && currentData.tags.length === 0 && currentData.welfareList.length === 0) {
         document.getElementById('bext-tags-row').style.display = 'none';
       } else {
         document.getElementById('bext-tags-row').style.display = 'flex';
@@ -555,6 +580,7 @@
         lines.push(`【招聘负责】${r}`);
       }
       if (currentData.locationAddress) lines.push(`【工作地点】${currentData.locationAddress}`);
+      if (currentData.keywords.length > 0) lines.push(`【技能标签】${currentData.keywords.join(' / ')}`);
       if (currentData.tags.length > 0) lines.push(`【职位要求】${currentData.tags.join(' / ')}`);
       if (currentData.welfareList.length > 0) lines.push(`【福利待遇】${currentData.welfareList.join('、')}`);
 

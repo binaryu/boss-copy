@@ -185,6 +185,13 @@
   border: 1px solid #a7f3d0;
 }
 
+.bext-meta-pill.keyword {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  font-weight: 500;
+}
+
 .bext-active-badge {
   display: inline-flex;
   align-items: center;
